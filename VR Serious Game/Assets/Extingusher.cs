@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Extingusher : MonoBehaviour
 {
-    float collisionTime = 0;
+    bool canFire = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,19 +20,16 @@ public class Extingusher : MonoBehaviour
     {
         if (target.gameObject.tag.Equals("Pin") == true)
         {
-            collisionTime = Time.time;
-            Destroy(gameObject);
+            //collisionTime = Time.time;
         }
     }
 
     void OnCollisionStay(Collision target)
     {
+        canFire = true;
         if (target.gameObject.tag.Equals("Pin") == true)
         {
-            if (Time.time - collisionTime > 2)
-            {
-                Destroy(target.gameObject);
-            }
+            canFire = false;
         }
     }
 }
