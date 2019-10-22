@@ -30,7 +30,7 @@ public class PullPin : MonoBehaviour
 
     void OnTriggerStay(Collider otherCollider)
     {
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && Extinguisher.isGrabbed)
+        if (Extinguisher.isGrabbed) //OVRInput.Get(OVRInput.Button.PrimaryThumbstick)
         {
             this.transform.parent = null;
             Grabber = otherCollider.GetComponent<OVRGrabber>();
