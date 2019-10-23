@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PullPin : MonoBehaviour
 {
-    protected OVRGrabbable Extinguisher;
+    public OVRGrabbable Extinguisher;
     protected OVRGrabber Grabber;
-    private bool detached = false;
+    public bool detached = false;
     public static bool pinReleased = false;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class PullPin : MonoBehaviour
 
     void OnTriggerStay(Collider otherCollider)
     {
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && Extinguisher.isGrabbed)
+        if (Extinguisher.isGrabbed) //OVRInput.Get(OVRInput.Button.PrimaryThumbstick)
         {
             this.transform.parent = null;
             Grabber = otherCollider.GetComponent<OVRGrabber>();
