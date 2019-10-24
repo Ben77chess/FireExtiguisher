@@ -965,6 +965,11 @@ PrefabInstance:
       propertyPath: m_MaxSpreadDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6852281984388664887, guid: 04865078267a3494f9a51754e2eccb5f,
+        type: 3}
+      propertyPath: m_MaxSizeVariation
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 971608404, guid: 04865078267a3494f9a51754e2eccb5f, type: 3}
       propertyPath: m_IsTrigger
       value: 0
