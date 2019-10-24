@@ -12213,13 +12213,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'P ull the pin
-
-    A im the nozzle
-
-    S pray the bottom of the fire
-
-    S weep the nozzle back and forth'
+  m_Text: 
 --- !u!222 &1688611191
 CanvasRenderer:
   m_ObjectHideFlags: 0

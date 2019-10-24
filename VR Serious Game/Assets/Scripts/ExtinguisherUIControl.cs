@@ -35,21 +35,22 @@ public class ExtinguisherUIControl : MonoBehaviour
         {
             addLabel = true;
             state = 1; //Pull the pin
+            stateChangeTime = Time.time;
         }
-        else if (pinScript.detached && state == 1)
+        else if (pinScript.detached && state == 1 && stateChangeTime - Time.time <= -2)
         {
             addLabel = true;
             state = 2; //Aim the nozzle
             stateChangeTime = Time.time;
 
         }
-        else if (state == 2 && stateChangeTime - Time.time <= - 2)
+        else if (state == 2 && stateChangeTime - Time.time <= - 3)
         {
             addLabel = true;
             state = 3; //Squeeze the handle!
             stateChangeTime = Time.time;
         }
-        else if (state == 3 && stateChangeTime - Time.time <= -2)
+        else if (state == 3 && stateChangeTime - Time.time <= -3)
         {
             addLabel = true;
             state = 4; //Sweep the fire!
