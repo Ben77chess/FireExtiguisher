@@ -43,8 +43,15 @@ public class Fire : MonoBehaviour
     private float m_MaxSize = 1f;
     private float m_TrueScaleSpeed = 0.2f; // The actual speed used, after random variation
 
+    ~Fire()
+    {
+        g_FireCount--;
+    }
+
     private void Start()
     {
+        g_FireCount++;
+
         // Initialize the fire
         m_Systems = GetComponentsInChildren<ParticleSystem>();
         m_NextSpreadTime = m_SpreadTime; // Set the next time for the fire to spread to be 
@@ -135,11 +142,10 @@ public class Fire : MonoBehaviour
         bool hit = Physics.Raycast(castStart, randDirection, out raycastHit, m_MaxSpreadDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.UseGlobal);
 
         // If the raycast hit nothing or another fire, return
-        if (!hit || raycastHit.collider.gameObject.CompareTag("Fire"))
+        if (!hit || raycastHit.collider.gameObject.CompareTag("Fire") || raycastHit.collider.gameObject.CompareTag("Nonflammable"))
             return;
 
         // Create a new fire pointed with its "up" direction in the same direction as the normal
-        g_FireCount++;
         GameObject newFire = Instantiate(gameObject, raycastHit.point + raycastHit.normal * m_CastOffset, 
             Quaternion.LookRotation(Vector3.Cross(new Vector3(1f, 0f, 0f), raycastHit.normal), raycastHit.normal));
 
@@ -169,7 +175,6 @@ public class Fire : MonoBehaviour
         if (other.gameObject.CompareTag("Fire") && m_TimeAlive >= other.gameObject.GetComponent<Fire>().m_TimeAlive)
         {
             Destroy(other.gameObject);
-            g_FireCount--;
         }
     }
 }
