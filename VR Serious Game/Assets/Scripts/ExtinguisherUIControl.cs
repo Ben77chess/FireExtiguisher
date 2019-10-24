@@ -10,7 +10,8 @@ public class ExtinguisherUIControl : MonoBehaviour
     public GameObject handle, pin;
     PullPin pinScript;
     Handle handleScript;
-    float stateChangeTime = -2; 
+    float stateChangeTime = -2;
+    bool addLabel = true;
     void Start()
     {
         DebugUIBuilder.instance.AddLabel("Emergency!");
@@ -32,25 +33,34 @@ public class ExtinguisherUIControl : MonoBehaviour
         }
         if (pinScript.Extinguisher.isGrabbed && state == 0)
         {
+            addLabel = true;
             state = 1; //Pull the pin
         }
         else if (pinScript.detached && state == 1)
         {
+            addLabel = true;
             state = 2; //Aim the nozzle
             stateChangeTime = Time.time;
 
         }
         else if (state == 2 && stateChangeTime - Time.time <= - 2)
         {
+            addLabel = true;
             state = 3; //Squeeze the handle!
             stateChangeTime = Time.time;
         }
         else if (state == 3 && stateChangeTime - Time.time <= -2)
         {
+            addLabel = true;
             state = 4; //Sweep the fire!
             stateChangeTime = Time.time;
         }
-        setUIText();
+        if(addLabel)
+        {
+            setUIText();
+            addLabel = false;
+        }
+        
     }
 
     private void setUIText()
@@ -60,10 +70,10 @@ public class ExtinguisherUIControl : MonoBehaviour
                 DebugUIBuilder.instance.AddLabel("Pick up the fire extinguisher.");
                 break;
             case 1:
-                DebugUIBuilder.instance.AddLabel("Pull the pin!.");
+                DebugUIBuilder.instance.AddLabel("Pull the pin!");
                 break;
             case 2:
-                DebugUIBuilder.instance.AddLabel("Aim the nozzle!.");
+                DebugUIBuilder.instance.AddLabel("Aim the nozzle!");
                 break;
             case 3:
                 DebugUIBuilder.instance.AddLabel("Squeeze the handle!");
