@@ -5,7 +5,8 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     public bool m_Spreads = true;
-    public float m_SpreadRadius = 1f;
+    public float m_MaxSpreadDistance = 1f;
+    public float m_MinSpreadDistance = 0.7f;
     public float m_RadiusVariation = 0.1f;
     public float m_SpreadTime = 5f;
     private float m_TimeAlive = 0;
@@ -13,6 +14,10 @@ public class Fire : MonoBehaviour
 
     public static int g_FireCap = 100;
     public static int g_FireCount = 0;
+
+    private Vector3 m_Normal;
+    private float m_CastOffset;
+    private BoxCollider m_Collider;
 
     private float m_TimeSinceSpread = 0;
     private float m_NextSpreadTime;
@@ -27,6 +32,10 @@ public class Fire : MonoBehaviour
         m_NextSpreadTime = m_SpreadTime;
         m_TimeAlive = 0;
         ScaleParticles(0.2f);
+        m_Normal = new Vector3(0f, 1f, 0f);
+        m_Collider = gameObject.GetComponent<BoxCollider>();
+        m_CastOffset = (gameObject.transform.position - 
+            m_Collider.transform.TransformPoint(m_Collider.center)).magnitude;
     }
 
     private void Update()
@@ -59,21 +68,42 @@ public class Fire : MonoBehaviour
 
     private void Spread()
     {
+        m_NextSpreadTime = m_SpreadTime;
+
         if (g_FireCount >= g_FireCap)
             return;
 
         if (m_RelativeScale < 1f)
             return;
 
+        Vector3 randDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        randDirection.Normalize();
+
+        bool Negative = Random.Range(0, 2) < 1;
+        float castOffset = m_CastOffset;
+        if (Negative)
+            castOffset *= -1f;
+
+        Vector3 castStart = m_Collider.transform.TransformPoint(m_Collider.center) + castOffset * m_Normal;
+        if (Negative)
+        {
+            castStart += randDirection * m_MaxSpreadDistance;
+            randDirection *= -1f;
+        }
+
+        RaycastHit raycastHit;
+        bool hit = Physics.Raycast(castStart, randDirection, out raycastHit, m_MaxSpreadDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.UseGlobal);
+
+        if (!hit || raycastHit.collider.gameObject.CompareTag("Fire"))
+            return;
+
         g_FireCount++;
-        GameObject newFire = Instantiate(gameObject);
+        GameObject newFire = Instantiate(gameObject, raycastHit.point + raycastHit.normal * m_CastOffset, 
+            Quaternion.LookRotation(Vector3.Cross(new Vector3(1f, 0f, 0f), raycastHit.normal), raycastHit.normal) /*new Quaternion(0f, 1f, 0f, Random.Range(-1f, 1f))*/);
+
         Fire fireScript = newFire.GetComponent<Fire>();
         fireScript.m_RelativeScale = m_RelativeScale;
-        Vector3 randOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-        randOffset.Normalize();
-        float randRadius = m_SpreadRadius + m_SpreadRadius * Random.Range(-m_RadiusVariation, m_RadiusVariation);
-        newFire.transform.position = gameObject.transform.position + randOffset * randRadius;
-        m_NextSpreadTime = m_SpreadTime;
+        fireScript.m_Normal = raycastHit.normal;
 
         newFire.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
