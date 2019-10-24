@@ -51,7 +51,7 @@ public class Fire : MonoBehaviour
         m_TimeAlive = 0;
         ScaleParticles(0.2f); // Make the flame start smaller and grow into full size
         // Assume the surface normal is "up" for this fire
-        m_Normal = gameObject.transform.up;
+        m_Normal = new Vector3(0f, 1f, 0f);
 
         // Get the collider and the distance from the collider that we will perform raycasts
         m_Collider = gameObject.GetComponent<BoxCollider>();
@@ -141,7 +141,9 @@ public class Fire : MonoBehaviour
         // Create a new fire pointed with its "up" direction in the same direction as the normal
         g_FireCount++;
         GameObject newFire = Instantiate(gameObject, raycastHit.point + raycastHit.normal * m_CastOffset, 
-            Quaternion.LookRotation(Vector3.Cross(randDirection, raycastHit.normal), raycastHit.normal));
+            Quaternion.LookRotation(Vector3.Cross(new Vector3(1f, 0f, 0f), raycastHit.normal), raycastHit.normal));
+
+        newFire.GetComponent<Fire>().m_Normal = raycastHit.normal;
 
         // Ensure the fire does not move
         newFire.GetComponent<Rigidbody>().velocity = Vector3.zero;
