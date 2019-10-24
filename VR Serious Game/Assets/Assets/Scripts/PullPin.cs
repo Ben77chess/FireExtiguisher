@@ -5,7 +5,7 @@ using UnityEngine;
 public class PullPin : MonoBehaviour
 {
     public OVRGrabbable Extinguisher;
-    protected OVRGrabber Grabber;
+    protected GameObject Grabber;
     public bool detached = false;
     public static bool pinReleased = false;
     // Start is called before the first frame update
@@ -17,23 +17,28 @@ public class PullPin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick)  && detached && Grabber != null && !pinReleased)
-        {
-            transform.position = Grabber.transform.position;
-        }
+        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick)  && detached && !pinReleased)
+        //{
+        //    transform.position = Grabber.transform.position;
+        //    transform.rotation = Grabber.transform.rotation;
+        //}
         if (!OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && detached)
         {
             pinReleased = true;
-            this.gameObject.SetActive(false);
+            Destroy(this.gameObject.GetComponent<FixedJoint>());
+            //this.gameObject.SetActive(false);
         }
     }
 
     void OnTriggerStay(Collider otherCollider)
     {
-        if (Extinguisher.isGrabbed) //OVRInput.Get(OVRInput.Button.PrimaryThumbstick)
+        if (!detached && Extinguisher.isGrabbed && OVRInput.Get(OVRInput.Button.PrimaryThumbstick))
         {
             this.transform.parent = null;
-            Grabber = otherCollider.GetComponent<OVRGrabber>();
+            Grabber = otherCollider.gameObject;
+            //Grabber.GetComponentInParent<Rigidbody>();
+            gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponentInParent<Rigidbody>();
+            //Destroy(this.gameObject.GetComponent<FixedJoint>());
             detached = true;
         }
     }
