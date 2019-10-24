@@ -24,7 +24,7 @@ public class PullPin : MonoBehaviour
         if (!OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && detached)
         {
             pinReleased = true;
-            this.gameObject.SetActive(false);
+            this.enabled = false;
         }
     }
 

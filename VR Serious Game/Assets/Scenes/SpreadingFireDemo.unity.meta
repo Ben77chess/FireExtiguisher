@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:VR Serious Game/Assets/Scenes/SpreadingFireDemo.unity.meta
 guid: 0317c18c6a7c9f344a1ad1278cf13dd8
 DefaultImporter:
+=======
+guid: 74b8db9bc131bd74eadc3f6a70534b92
+MonoImporter:
+>>>>>>> Stashed changes:VR Serious Game/Assets/Scripts/PullPin.cs.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

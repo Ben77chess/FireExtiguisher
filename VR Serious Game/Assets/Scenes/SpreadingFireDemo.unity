@@ -1356,7 +1356,12 @@ PrefabInstance:
     - target: {fileID: 3390456765965642870, guid: 4029c7c40a98a4a4fa2adc84a5bf54f4,
         type: 3}
       propertyPath: m_SpreadTime
-      value: 2
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3390456765965642870, guid: 4029c7c40a98a4a4fa2adc84a5bf54f4,
+        type: 3}
+      propertyPath: m_FireCap
+      value: 1000000000
       objectReference: {fileID: 0}
     - target: {fileID: 2270718645857387556, guid: 4029c7c40a98a4a4fa2adc84a5bf54f4,
         type: 3}

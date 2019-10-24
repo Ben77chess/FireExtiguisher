@@ -13,7 +13,8 @@ public class ExtinguisherUIControl : MonoBehaviour
     float stateChangeTime = -2; 
     void Start()
     {
-        DebugUIBuilder.instance.AddLabel("Label");
+        DebugUIBuilder.instance.AddLabel("Emergency!");
+        DebugUIBuilder.instance.Show();
         pinScript = pin.GetComponent<PullPin>();
         handleScript = handle.GetComponent<Handle>();
     }
@@ -21,6 +22,14 @@ public class ExtinguisherUIControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!pinScript)
+        {
+            pinScript = pin.GetComponent<PullPin>();
+        }
+        if (!handleScript)
+        {
+            handleScript = handle.GetComponent<Handle>();
+        }
         if (pinScript.Extinguisher.isGrabbed && state == 0)
         {
             state = 1; //Pull the pin
@@ -41,6 +50,7 @@ public class ExtinguisherUIControl : MonoBehaviour
             state = 4; //Sweep the fire!
             stateChangeTime = Time.time;
         }
+        setUIText();
     }
 
     private void setUIText()
