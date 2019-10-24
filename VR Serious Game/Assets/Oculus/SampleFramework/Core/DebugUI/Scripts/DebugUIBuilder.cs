@@ -159,7 +159,7 @@ public class DebugUIBuilder : MonoBehaviour
       toEnable[i].SetActive(true);
     }
 
-    int numPanels = targetContentPanels.Length;
+        int numPanels = targetContentPanels.Length;
     for (int i = 0; i < numPanels; ++i)
     {
       targetContentPanels[i].gameObject.SetActive(insertedElements[i].Count > 0);
