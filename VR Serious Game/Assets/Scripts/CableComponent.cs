@@ -38,12 +38,6 @@ public class CableComponent : MonoBehaviour
 		InitLineRenderer();
 	}
 
-	/**
-	 * Init cable particles
-	 * 
-	 * Creates the cable particles along the cable length
-	 * and binds the start and end tips to their respective game objects.
-	 */
 	void InitCableParticles()
 	{
 		// Calculate segments to use
@@ -52,7 +46,8 @@ public class CableComponent : MonoBehaviour
 		else
 			segments = Mathf.CeilToInt (cableLength * segmentsPerUnit);
 
-		Vector3 cableDirection = (endPoint.position - transform.position).normalized;
+        Vector3 cableDirection = (endPoint.position - transform.position).normalized;
+
 		float initialSegmentLength = cableLength / segments;
 		points = new CableParticle[segments + 1];
 
@@ -70,14 +65,11 @@ public class CableComponent : MonoBehaviour
 		end.Bind(endPoint.transform);
 	}
 
-	/**
-	 * Initialized the line renderer
-	 */
 	void InitLineRenderer()
 	{
 		line = this.gameObject.AddComponent<LineRenderer>();
-		line.SetWidth(cableWidth, cableWidth);
-		line.SetVertexCount(segments + 1);
+		line.startWidth = cableWidth;
+		line.positionCount = segments + 1;
 		line.material = cableMaterial;
 		line.GetComponent<Renderer>().enabled = true;
 	}
@@ -92,11 +84,6 @@ public class CableComponent : MonoBehaviour
 		RenderCable();
 	}
 
-	/**
-	 * Render Cable
-	 * 
-	 * Update every particle position in the line renderer.
-	 */
 	void RenderCable()
 	{
 		for (int pointIdx = 0; pointIdx < segments + 1; pointIdx++) 
@@ -119,11 +106,7 @@ public class CableComponent : MonoBehaviour
 		}
 	}
 
-	/**
-	 * Verler integration pass
-	 * 
-	 * In this step every particle updates its position and speed.
-	 */
+
 	void VerletIntegrate()
 	{
 		Vector3 gravityDisplacement = Time.fixedDeltaTime * Time.fixedDeltaTime * Physics.gravity;
@@ -133,11 +116,6 @@ public class CableComponent : MonoBehaviour
 		}
 	}
 
-	/**
-	 * Constrains solver pass
-	 * 
-	 * In this step every constraint is addressed in sequence
-	 */
 	void SolveConstraints()
 	{
 		// For each solver iteration..
@@ -152,10 +130,6 @@ public class CableComponent : MonoBehaviour
 
 
 	#region Solver Constraints
-
-	/**
-	 * Distance constraint for each segment / pair of particles
-	 **/
 	void SolveDistanceConstraint()
 	{
 		float segmentLength = cableLength / segments;
@@ -169,11 +143,6 @@ public class CableComponent : MonoBehaviour
 		}
 	}
 		
-	/**
-	 * Distance Constraint 
-	 * 
-	 * This is the main constrains that keeps the cable particles "tied" together.
-	 */
 	void SolveDistanceConstraint(CableParticle particleA, CableParticle particleB, float segmentLength)
 	{
 		// Find current vector between particles
@@ -198,9 +167,6 @@ public class CableComponent : MonoBehaviour
 		}
 	}
 
-	/**
-	 * Stiffness constraint
-	 **/
 	void SolveStiffnessConstraint()
 	{
 		float distance = (points[0].Position - points[segments].Position).magnitude;
@@ -213,17 +179,8 @@ public class CableComponent : MonoBehaviour
 		}	
 	}
 
-	/**
-	 * TODO: I'll implement this constraint to reinforce cable stiffness 
-	 * 
-	 * As the system has more particles, the verlet integration aproach 
-	 * may get way too loose cable simulation. This constraint is intended 
-	 * to reinforce the cable stiffness.
-	 * // throw new System.NotImplementedException ();
-	 **/
 	void SolveStiffnessConstraint(CableParticle cableParticle, float distance)
 	{
-	
 
 	}
 
