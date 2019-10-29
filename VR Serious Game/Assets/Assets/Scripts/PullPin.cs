@@ -11,7 +11,7 @@ public class PullPin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Extinguisher = transform.parent.gameObject.GetComponent<OVRGrabbable>();
+        Extinguisher = transform.parent.Find("Body").gameObject.GetComponent<OVRGrabbable>();
     }
 
     // Update is called once per frame
