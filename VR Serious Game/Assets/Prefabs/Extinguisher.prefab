@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &3472565585081746094
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411114180406959189}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -4162253513501663206, guid: 548c4a19a5f51474aa64b1deac5f9296, type: 3}
---- !u!114 &2298017730154587585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411114180406959189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63dcccc27b9e2f40841b21de8683d6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Extinguisher: {fileID: 0}
-  detached: 0
 --- !u!54 &2239864682480786419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44,6 +16,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &3472565585081746094
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411114180406959189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -4162253513501663206, guid: 548c4a19a5f51474aa64b1deac5f9296, type: 3}
 --- !u!138 &3427942244612410397
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -58,6 +44,20 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2298017730154587585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411114180406959189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63dcccc27b9e2f40841b21de8683d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Extinguisher: {fileID: 0}
+  detached: 0
 --- !u!1 &1608654690654450429
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   cableLength: 3
   totalSegments: 0
   segmentsPerUnit: 6
-  cableWidth: 0.1
+  cableWidth: 1
   verletIterations: 1
   solverIterations: 2
   stiffness: 1
@@ -384,6 +384,22 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+--- !u!54 &9039121369511678851
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128587675655668447}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &4261065823732071773
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -398,6 +414,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 6606501483488557099, guid: e1fc0b08a7c62284b9020283b8454930, type: 3}
+--- !u!138 &2998978620567625624
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128587675655668447}
+  m_ConnectedBody: {fileID: 9055473567975323602}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!95 &4231240437295685478
 Animator:
   serializedVersion: 3
@@ -429,36 +459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd2fb8aae11f03458e5f814cc5c7659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &9039121369511678851
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128587675655668447}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!138 &2998978620567625624
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128587675655668447}
-  m_ConnectedBody: {fileID: 9055473567975323602}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!54 &7687764124880325781
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -475,7 +475,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &8356132106636257580
+--- !u!114 &5044608291641391996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6381713767890850796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints: []
+--- !u!138 &3070332857779169357
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -692,6 +709,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4751607591638388606}
     m_Modifications:
+    - target: {fileID: 1770225494121289706, guid: 4677c18984229da4397e022f8dcb0fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Particle_Foam
+      objectReference: {fileID: 0}
     - target: {fileID: 1770225494121289705, guid: 4677c18984229da4397e022f8dcb0fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -762,11 +784,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.35113
       objectReference: {fileID: 0}
-    - target: {fileID: 1770225494121289706, guid: 4677c18984229da4397e022f8dcb0fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Particle_Foam
-      objectReference: {fileID: 0}
     - target: {fileID: 1770225494121289704, guid: 4677c18984229da4397e022f8dcb0fe6,
         type: 3}
       propertyPath: CollisionModule.enabled
@@ -818,11 +835,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: nozzle
       objectReference: {fileID: 0}
-    - target: {fileID: -6283877591383234665, guid: d37ea7f521c7449488f97352b683ab8a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 848b1e5315065d7489afdc5a95650a65, type: 2}
     - target: {fileID: -4216859302048453862, guid: d37ea7f521c7449488f97352b683ab8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -958,6 +970,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -11.38
       objectReference: {fileID: 0}
+    - target: {fileID: -6283877591383234665, guid: d37ea7f521c7449488f97352b683ab8a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 848b1e5315065d7489afdc5a95650a65, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d37ea7f521c7449488f97352b683ab8a, type: 3}
 --- !u!4 &5448217791343576211 stripped
