@@ -69,7 +69,8 @@ public class CableComponent : MonoBehaviour
 	{
 		line = this.gameObject.AddComponent<LineRenderer>();
 		line.startWidth = cableWidth;
-		line.positionCount = segments + 1;
+        line.endWidth = cableWidth;
+        line.positionCount = segments + 1;
 		line.material = cableMaterial;
 		line.GetComponent<Renderer>().enabled = true;
 	}
