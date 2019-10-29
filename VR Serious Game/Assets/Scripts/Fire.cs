@@ -46,6 +46,9 @@ public class Fire : MonoBehaviour
     ~Fire()
     {
         g_FireCount--;
+        FireAudioSource audioSource = FireAudioSource.GetAudioSource();
+        if (audioSource != null)
+            audioSource.RemoveFire(transform.position);
     }
 
     private void Start()
@@ -73,6 +76,10 @@ public class Fire : MonoBehaviour
         m_MaxSize = Random.Range(1f - m_MaxSizeVariation, 1f + m_MaxSizeVariation);
         // Randomize the growth speed
         m_TrueScaleSpeed = m_ScaleSpeed * Random.Range(1f - m_GrowthVariation, 1f + m_GrowthVariation);
+
+        FireAudioSource audioSource = FireAudioSource.GetAudioSource();
+        if (audioSource != null)
+            audioSource.AddFire(transform.position);
     }
 
     private void Update()
