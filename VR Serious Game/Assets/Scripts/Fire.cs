@@ -43,8 +43,14 @@ public class Fire : MonoBehaviour
     private float m_MaxSize = 1f;
     private float m_TrueScaleSpeed = 0.2f; // The actual speed used, after random variation
 
-    ~Fire()
+    private void OnDestroy()
     {
+        FireAudioSource audioSource = FireAudioSource.GetAudioSource();
+        if (audioSource != null)
+        {
+            audioSource.RemoveFire(transform.position);
+        }
+
         g_FireCount--;
     }
 
@@ -73,6 +79,10 @@ public class Fire : MonoBehaviour
         m_MaxSize = Random.Range(1f - m_MaxSizeVariation, 1f + m_MaxSizeVariation);
         // Randomize the growth speed
         m_TrueScaleSpeed = m_ScaleSpeed * Random.Range(1f - m_GrowthVariation, 1f + m_GrowthVariation);
+
+        FireAudioSource audioSource = FireAudioSource.GetAudioSource();
+        if (audioSource != null)
+            audioSource.AddFire(transform.position);
     }
 
     private void Update()

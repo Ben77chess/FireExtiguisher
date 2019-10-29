@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5067923556301616821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5067923556301616811}
+  - component: {fileID: 5067923556301616810}
+  m_Layer: 0
+  m_Name: FireAudioSourceObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5067923556301616811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067923556301616821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5067923556301616810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067923556301616821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd228fe18010d5e4db1a736c69c3f784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SmallFireClips:
+  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
+  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
+  m_MediumFireClips:
+  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
+  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
+  - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
+  m_LargeFireClips:
+  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
+  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
+  - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
+  - {fileID: 8300000, guid: 0276f92d555aa704f89cfa91c6127f13, type: 3}
+  - {fileID: 8300000, guid: 2777f686d989439449da26507f306b44, type: 3}
+  - {fileID: 8300000, guid: f6863c4f600124b4b9cf79c622156adb, type: 3}
+  m_RagingFireClips:
+  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
+  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
+  - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
+  - {fileID: 8300000, guid: 0276f92d555aa704f89cfa91c6127f13, type: 3}
+  - {fileID: 8300000, guid: 2777f686d989439449da26507f306b44, type: 3}
+  - {fileID: 8300000, guid: f6863c4f600124b4b9cf79c622156adb, type: 3}
+  - {fileID: 8300000, guid: 8eb7bc7b84888a14da7b680dab7fcecd, type: 3}
+  m_SmallThreshold: 1
+  m_MediumThreshold: 4
+  m_LargeThreshold: 10
+  m_RagingThreshold: 50
