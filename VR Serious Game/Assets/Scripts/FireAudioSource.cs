@@ -46,8 +46,9 @@ public class FireAudioSource : MonoBehaviour
         {
             if (sourceCount >= listClips.Count)
             {
-                source.Stop();
+                source.Pause();
                 sourceCount++;
+                continue;
             }
 
             source.clip = listClips[sourceCount];

@@ -43,12 +43,15 @@ public class Fire : MonoBehaviour
     private float m_MaxSize = 1f;
     private float m_TrueScaleSpeed = 0.2f; // The actual speed used, after random variation
 
-    ~Fire()
+    private void OnDestroy()
     {
-        g_FireCount--;
         FireAudioSource audioSource = FireAudioSource.GetAudioSource();
         if (audioSource != null)
+        {
             audioSource.RemoveFire(transform.position);
+        }
+
+        g_FireCount--;
     }
 
     private void Start()
