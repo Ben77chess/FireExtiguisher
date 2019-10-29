@@ -10,12 +10,24 @@ public class ExtinguisherUIControl : MonoBehaviour
     public GameObject handle, pin;
     PullPin pinScript;
     Handle handleScript;
-    float stateChangeTime = -2;
+    float stateChangeTime = -2, toggleUITime = -1;
     bool addLabel = true;
+    Vector3 UIPos;
+    Quaternion UIRot;
     void Start()
     {
         DebugUIBuilder.instance.AddLabel("Emergency!");
-        DebugUIBuilder.instance.Show();
+        if (PlayerPrefs.GetInt("HideUI") != 1)
+        {
+            DebugUIBuilder.instance.Show();
+            PlayerPrefs.SetInt("HideUI", 0);
+        }
+        else
+        {
+            DebugUIBuilder.instance.Show();
+            UIPos = DebugUIBuilder.instance.transform.localPosition;
+            DebugUIBuilder.instance.Hide();
+        }
         pinScript = pin.GetComponent<PullPin>();
         handleScript = handle.GetComponent<Handle>();
     }
@@ -23,6 +35,24 @@ public class ExtinguisherUIControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.Get(OVRInput.Button.One) && toggleUITime - Time.time <= -1)
+        {
+            toggleUITime = Time.time;
+            if(PlayerPrefs.GetInt("HideUI") == 0)
+            {
+                UIPos = DebugUIBuilder.instance.gameObject.GetComponent<RectTransform>().localPosition;
+                UIRot = DebugUIBuilder.instance.gameObject.GetComponent<RectTransform>().localRotation;
+                PlayerPrefs.SetInt("HideUI", 1);
+                DebugUIBuilder.instance.Hide();
+            } else
+            {
+                PlayerPrefs.SetInt("HideUI", 0);
+                DebugUIBuilder.instance.Show();
+                DebugUIBuilder.instance.gameObject.GetComponent<RectTransform>().localPosition.Set(UIPos.x, UIPos.y, UIPos.z);
+                DebugUIBuilder.instance.gameObject.GetComponent<RectTransform>().localRotation.Set(UIRot.x, UIRot.y, UIRot.z, UIRot.w);
+            }
+            PlayerPrefs.Save();
+        }
         if (!pinScript)
         {
             pinScript = pin.GetComponent<PullPin>();
@@ -62,6 +92,14 @@ public class ExtinguisherUIControl : MonoBehaviour
             state = 5; //Reset the scene.
             stateChangeTime = Time.time;
         }
+        else if (state == 5 && stateChangeTime - Time.time <= -7)
+        {
+            addLabel = true;
+            state = 6; //Hide the UI
+            stateChangeTime = Time.time;
+            PlayerPrefs.SetInt("HideUI", 1);
+            PlayerPrefs.Save();
+        }
         if (addLabel)
         {
             setUIText();
@@ -77,19 +115,22 @@ public class ExtinguisherUIControl : MonoBehaviour
                 DebugUIBuilder.instance.AddLabel("Pick up the fire extinguisher.");
                 break;
             case 1:
-                DebugUIBuilder.instance.AddLabel("Pull the pin!");
+                DebugUIBuilder.instance.AddLabel("Pull the pin! (Use the left thumbstick)");
                 break;
             case 2:
                 DebugUIBuilder.instance.AddLabel("Aim the nozzle!");
                 break;
             case 3:
-                DebugUIBuilder.instance.AddLabel("Squeeze the handle!");
+                DebugUIBuilder.instance.AddLabel("Squeeze the handle! (Use the left thumbstick)");
                 break;
             case 4:
                 DebugUIBuilder.instance.AddLabel("Sweep over the fire!");
                 break;
             case 5:
                 DebugUIBuilder.instance.AddLabel("Touch the pink cube and press left thumbstick to reset the scene.");
+                break;
+            case 6:
+                DebugUIBuilder.instance.Hide();
                 break;
             default:
                 DebugUIBuilder.instance.AddLabel("Default");
