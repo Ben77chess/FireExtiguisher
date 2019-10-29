@@ -56,7 +56,13 @@ public class ExtinguisherUIControl : MonoBehaviour
             state = 4; //Sweep the fire!
             stateChangeTime = Time.time;
         }
-        if(addLabel)
+        else if (state == 4 && stateChangeTime - Time.time <= -7)
+        {
+            addLabel = true;
+            state = 5; //Reset the scene.
+            stateChangeTime = Time.time;
+        }
+        if (addLabel)
         {
             setUIText();
             addLabel = false;
@@ -81,6 +87,9 @@ public class ExtinguisherUIControl : MonoBehaviour
                 break;
             case 4:
                 DebugUIBuilder.instance.AddLabel("Sweep over the fire!");
+                break;
+            case 5:
+                DebugUIBuilder.instance.AddLabel("Touch the pink cube and press left thumbstick to reset the scene.");
                 break;
             default:
                 DebugUIBuilder.instance.AddLabel("Default");
