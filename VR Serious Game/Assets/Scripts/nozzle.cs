@@ -27,7 +27,7 @@ public class nozzle : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<OVRGrabber>()  )
         {
-            Grabber = other.transform.parent.gameObject;
+            Grabber = other.gameObject;
         }
     }
 
@@ -37,7 +37,7 @@ public class nozzle : MonoBehaviour
         {
             gameObject.AddComponent<Rigidbody>();
             gameObject.AddComponent<FixedJoint>();
-            gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponent<Rigidbody>();
+            gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponentInParent<Rigidbody>();
             isHeld = true;
         }
         if (!OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && isHeld)
