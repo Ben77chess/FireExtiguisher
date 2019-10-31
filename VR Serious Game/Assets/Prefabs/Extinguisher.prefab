@@ -909,6 +909,7 @@ GameObject:
   - component: {fileID: 1768604587501153382}
   - component: {fileID: 6923474900311503941}
   - component: {fileID: 2616597105334807750}
+  - component: {fileID: 1838780945699668711}
   m_Layer: 0
   m_Name: Extinguisher
   m_TagString: Untagged
@@ -1175,6 +1176,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1838780945699668711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8622775033404669293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8c6e5652cb79e4d9cba72137c32a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handle: {fileID: 6128587675655668447}
+  pin: {fileID: 1411114180406959189}
 --- !u!1 &8837116459667913368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,15 +1549,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8b6ce5debbf812745ad220125353b788, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548c4a19a5f51474aa64b1deac5f9296, type: 3}
---- !u!4 &2724133542261599814 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 548c4a19a5f51474aa64b1deac5f9296,
-    type: 3}
-  m_PrefabInstance: {fileID: 6968376804186981724}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411114180406959189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 548c4a19a5f51474aa64b1deac5f9296,
+    type: 3}
+  m_PrefabInstance: {fileID: 6968376804186981724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2724133542261599814 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 548c4a19a5f51474aa64b1deac5f9296,
     type: 3}
   m_PrefabInstance: {fileID: 6968376804186981724}
   m_PrefabAsset: {fileID: 0}
