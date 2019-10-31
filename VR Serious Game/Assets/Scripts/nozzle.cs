@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class nozzle : MonoBehaviour
 {
-    private OVRGrabbable nozzleGrabbable;
+    private OVRGrabbable Extinguisher;
     private GameObject Grabber;
     private Vector3 initPositon;
     private Quaternion initRotation;
+    private bool isHeld;
     // Start is called before the first frame update
     void Start()
     {
-        nozzleGrabbable = gameObject.GetComponent<OVRGrabbable>();
+        Extinguisher = transform.parent.gameObject.GetComponent<OVRGrabbable>();
         initPositon = transform.localPosition;
         initRotation = transform.localRotation;
     }
@@ -19,23 +20,30 @@ public class nozzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nozzleGrabbable.isGrabbed && Grabber != null)
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponentInParent<OVRGrabber>()  )
         {
-            gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponent<Rigidbody>();
-        }
-        else
-        {
-            transform.localPosition = initPositon;
-            transform.localRotation = initRotation;
-            gameObject.GetComponent<FixedJoint>().connectedBody = transform.parent.Find("Body").GetComponent<Rigidbody>();
+            Grabber = other.transform.parent.gameObject;
         }
     }
 
     void OnTriggerStay(Collider otherCollider)
     {
-        if (otherCollider.gameObject.GetComponentInParent<OVRGrabber>())
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && Extinguisher.isGrabbed && Grabber != null)
         {
-            Grabber = otherCollider.transform.parent.gameObject;
+            gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponent<Rigidbody>();
+            isHeld = true;
+        }
+        if (!OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && isHeld)
+        {
+            transform.localPosition = initPositon;
+            transform.localRotation = initRotation;
+            gameObject.GetComponent<FixedJoint>().connectedBody = null;
+            isHeld = false;
         }
     }
 

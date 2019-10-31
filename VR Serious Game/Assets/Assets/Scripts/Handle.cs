@@ -12,18 +12,13 @@ public class Handle : MonoBehaviour
     void Start()
     {
         sounds = gameObject.GetComponentsInParent<AudioSource>();
-        foamParticle = transform.parent.Find("Particle_Foam").gameObject.GetComponent<ParticleSystem>();
+        foamParticle = transform.parent.Find("nozzle").Find("Particle_Foam").gameObject.GetComponent<ParticleSystem>();
         anim = GetComponent<Animator>();
         isShooting = false;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    private void OnTriggerStay(Collider other)
     {
         if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && PullPin.pinReleased)
         {
@@ -32,7 +27,7 @@ public class Handle : MonoBehaviour
             anim.SetBool("squeezed", true);
             foreach (AudioSource sound in sounds)
             {
-                if(!sound.isPlaying)
+                if (!sound.isPlaying)
                 {
                     sound.Play();
                 }
@@ -48,5 +43,10 @@ public class Handle : MonoBehaviour
                 sound.Stop();
             }
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        
     }
 }
