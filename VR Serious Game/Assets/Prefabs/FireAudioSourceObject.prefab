@@ -47,23 +47,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
   - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
   m_MediumFireClips:
-  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
-  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
   - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
   m_LargeFireClips:
-  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
-  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
-  - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
   - {fileID: 8300000, guid: 0276f92d555aa704f89cfa91c6127f13, type: 3}
   - {fileID: 8300000, guid: 2777f686d989439449da26507f306b44, type: 3}
   - {fileID: 8300000, guid: f6863c4f600124b4b9cf79c622156adb, type: 3}
   m_RagingFireClips:
-  - {fileID: 8300000, guid: 1050acc0ecf2a064fb332943503de905, type: 3}
-  - {fileID: 8300000, guid: 00090f53deabc4f4eaf1a18ff22b0964, type: 3}
-  - {fileID: 8300000, guid: 9543081030b043c41847b531c48c2654, type: 3}
-  - {fileID: 8300000, guid: 0276f92d555aa704f89cfa91c6127f13, type: 3}
-  - {fileID: 8300000, guid: 2777f686d989439449da26507f306b44, type: 3}
-  - {fileID: 8300000, guid: f6863c4f600124b4b9cf79c622156adb, type: 3}
   - {fileID: 8300000, guid: 8eb7bc7b84888a14da7b680dab7fcecd, type: 3}
   m_SmallThreshold: 1
   m_MediumThreshold: 4
