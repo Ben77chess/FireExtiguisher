@@ -56,6 +56,11 @@ public class FireAudioSource : MonoBehaviour
         ChangeAudio();
     }
 
+    private void OnDestroy()
+    {
+        g_LevelAudioSource = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -174,13 +179,23 @@ public class FireAudioSource : MonoBehaviour
     {
         lock (this)
         {
-            if (m_FireCount <= 0)
+            if (m_FireCount <= 0 || g_LevelAudioSource == null)
             {
                 return;
             }
 
             transform.position -= position / m_FireCount;
-            float factor = 1f / ((float)(m_FireCount - 1) / m_FireCount);
+            float temp = ((float)(m_FireCount - 1) / m_FireCount);
+
+            if (temp == 0f)
+            {
+                transform.position = Vector3.zero;
+                m_FireCount = 0;
+                ChangeAudio();
+                return;
+            }
+
+            float factor = 1f / temp;
             transform.position *= factor;
             int copy = m_FireCount;
             m_FireCount--;
