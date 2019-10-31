@@ -33,8 +33,10 @@ public class nozzle : MonoBehaviour
 
     void OnTriggerStay(Collider otherCollider)
     {
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && Extinguisher.isGrabbed && Grabber != null)
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstick) && Extinguisher.isGrabbed && Grabber != null && !isHeld)
         {
+            gameObject.AddComponent<Rigidbody>();
+            gameObject.AddComponent<FixedJoint>();
             gameObject.GetComponent<FixedJoint>().connectedBody = Grabber.GetComponent<Rigidbody>();
             isHeld = true;
         }
@@ -42,7 +44,8 @@ public class nozzle : MonoBehaviour
         {
             transform.localPosition = initPositon;
             transform.localRotation = initRotation;
-            gameObject.GetComponent<FixedJoint>().connectedBody = null;
+            Destroy(gameObject.GetComponent<FixedJoint>());
+            Destroy(gameObject.GetComponent<Rigidbody>());
             isHeld = false;
         }
     }
